@@ -1,0 +1,6 @@
+---
+applications:
+- name: digitalmarketplace-api
+  memory: 512M
+  host: dmapi
+  instances: 1
