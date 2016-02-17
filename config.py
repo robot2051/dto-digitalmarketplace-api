@@ -35,6 +35,8 @@ class Config:
 
     DM_FAILED_LOGIN_LIMIT = 5
 
+    VCAP_SERVICES = None
+
 
 class Test(Config):
     DM_SEARCH_API_AUTH_TOKEN = 'test'
