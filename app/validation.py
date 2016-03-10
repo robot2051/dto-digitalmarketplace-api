@@ -42,6 +42,10 @@ SCHEMA_NAMES = [
     'suppliers',
     'new-supplier',
     'contact-information',
+    'services-g-cloud-8-iaas',
+    'services-g-cloud-8-saas',
+    'services-g-cloud-8-paas',
+    'services-g-cloud-8-scs',
 ]
 FORMAT_CHECKER = FormatChecker()
 
