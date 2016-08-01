@@ -10,6 +10,21 @@ import logging
 from utils import nonEmptyOrNone, makeClient
 
 
+def supplier_exists(client, code):
+    path = '/suppliers/{}'.format(code)
+    result = client.get(path)
+    print result.status_code
+    return result.status_code == 200
+
+
+def upsert_supplier(client, supplier):
+    data = json.dumps({'supplier': supplier})
+    content_type = 'application/json'
+    if supplier_exists(client, supplier['code']):
+        return client.patch('/suppliers/{}'.format(supplier['code']), data=data, content_type=content_type)
+    return client.post('/suppliers', data=data, content_type=content_type)
+
+
 def run_import(input_file, client):
     num_failures = 0
     num_successes = 0
@@ -67,7 +82,7 @@ def run_import(input_file, client):
             }]
         }
 
-        response = client.post('/suppliers', data=json.dumps({'supplier': supplier}), content_type='application/json')
+        response = upsert_supplier(client, supplier)
         if response.status_code >= 400:
             num_failures += 1
             msg = 'Error adding supplier {}: server returned code {} {}'.format(
